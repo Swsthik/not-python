@@ -82,6 +82,27 @@ class Parser:
 
             self.next_token()
             self.unary()
+    def power(self):
+        self.term()
+        while self.check_token(TokenType.DOUBLE_STAR):
+            self.emitter.emit(self.cur_token.text)
+            self.next_token()
+            self.term()
+    def term(self):
+        if self.check_peek(TokenType.MODULO):
+            self.emitter.emit("(int)")
+
+        self.power()
+
+        while self.check_token(TokenType.ASTERISK) or self.check_token(TokenType.SLASH) or \
+                self.check_token(TokenType.MODULO):
+            self.emitter.emit(self.cur_token.text)
+
+            if self.check_token(TokenType.MODULO):
+                self.emitter.emit("(int)")
+
+            self.next_token()
+            self.power()
 
     def expression(self):
         self.term()
