@@ -29,6 +29,10 @@ class TokenType(enum.Enum):
     GT = 210
     GTEQ = 211
     MODULO = 212
+    DOUBLE_STAR = 213
+    # Assign a unique value
+
+
     # Brackets.
     LPAREN = 301
     RPAREN = 302
