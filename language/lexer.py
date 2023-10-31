@@ -54,8 +54,14 @@ class Lexer:
             return(Token(self.curChar, TokenType.PLUS))
         elif self.curChar == '-':
             return(Token(self.curChar, TokenType.MINUS))
+        
         elif self.curChar == '*':
             return(Token(self.curChar, TokenType.ASTERISK))
+         elif self.curChar == '*':
+        if self.peek() == '*':
+            lastChar = self.curChar
+            self.next_char()
+            return Token(lastChar + self.curChar, TokenType.DOUBLE_STAR)
         elif self.curChar == '/':
             return(Token(self.curChar, TokenType.SLASH))
         elif self.curChar == '%':
